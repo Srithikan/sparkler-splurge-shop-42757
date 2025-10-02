@@ -141,11 +141,11 @@ const Index = () => {
 
       {/* Mobile Cart Sheet */}
       <Sheet open={isMobileCartOpen} onOpenChange={setIsMobileCartOpen}>
-        <SheetContent side="bottom" className="h-[90vh] p-0">
-          <SheetHeader className="p-4 border-b">
+        <SheetContent side="bottom" className="h-[90vh] p-0 flex flex-col">
+          <SheetHeader className="p-4 border-b flex-shrink-0">
             <SheetTitle>Your Cart</SheetTitle>
           </SheetHeader>
-          <div className="h-full">
+          <div className="flex-1 overflow-hidden">
             <Cart items={cartItems} onDownloadOrder={handleDownloadOrder} />
           </div>
         </SheetContent>

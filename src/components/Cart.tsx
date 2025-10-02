@@ -24,8 +24,8 @@ export const Cart = ({ items, onDownloadOrder }: CartProps) => {
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <Card className="sticky top-4 shadow-hover border-2 border-primary/20 bg-card overflow-hidden">
-      <div className="bg-gradient-festive p-4 text-primary-foreground">
+    <Card className="sticky top-4 shadow-hover border-2 border-primary/20 bg-card overflow-hidden h-full flex flex-col">
+      <div className="bg-gradient-festive p-4 text-primary-foreground flex-shrink-0">
         <div className="flex items-center gap-2">
           <ShoppingCart className="h-5 w-5" />
           <h2 className="text-lg font-bold">Your Cart</h2>
@@ -36,7 +36,7 @@ export const Cart = ({ items, onDownloadOrder }: CartProps) => {
         )}
       </div>
 
-      <ScrollArea className="h-[calc(100vh-300px)] min-h-[200px]">
+      <ScrollArea className="flex-1 min-h-0">
         <div className="p-4 space-y-3">
           {items.length === 0 ? (
             <div className="text-center py-8 text-muted-foreground">
@@ -65,7 +65,7 @@ export const Cart = ({ items, onDownloadOrder }: CartProps) => {
         </div>
       </ScrollArea>
 
-      <div className="border-t p-4 space-y-4 bg-muted/30">
+      <div className="border-t p-4 space-y-4 bg-muted/30 flex-shrink-0">
         <div className="flex justify-between items-center">
           <span className="text-lg font-bold text-card-foreground">Total</span>
           <span className="text-2xl font-bold bg-gradient-festive bg-clip-text text-transparent">
