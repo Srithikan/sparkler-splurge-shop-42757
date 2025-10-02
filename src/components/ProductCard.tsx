@@ -1,8 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Cracker } from "@/data/crackers";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Minus, Plus } from "lucide-react";
 
 interface ProductCardProps {
   product: Cracker;
@@ -45,14 +46,34 @@ export const ProductCard = ({ product, quantity, onQuantityChange }: ProductCard
 
         <div className="space-y-2">
           <label className="text-xs text-muted-foreground">Quantity</label>
-          <Input
-            type="number"
-            min="0"
-            value={quantity || ""}
-            onChange={handleQuantityChange}
-            placeholder="0"
-            className="h-9 text-center font-medium"
-          />
+          <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              className="h-9 w-9 flex-shrink-0"
+              onClick={() => onQuantityChange(product.id, Math.max(0, quantity - 1))}
+            >
+              <Minus className="h-4 w-4" />
+            </Button>
+            <Input
+              type="number"
+              min="0"
+              value={quantity || ""}
+              onChange={handleQuantityChange}
+              placeholder="0"
+              className="h-9 text-center font-medium"
+            />
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              className="h-9 w-9 flex-shrink-0"
+              onClick={() => onQuantityChange(product.id, quantity + 1)}
+            >
+              <Plus className="h-4 w-4" />
+            </Button>
+          </div>
           {quantity > 0 && (
             <p className="text-sm font-semibold text-primary">
               Total: ₹{itemTotal}

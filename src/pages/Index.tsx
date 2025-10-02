@@ -4,6 +4,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { Cart } from "@/components/Cart";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { downloadOrderAsCSV } from "@/utils/csvExport";
 import { toast } from "sonner";
 import { Sparkles, Phone } from "lucide-react";
@@ -11,6 +12,7 @@ import { Sparkles, Phone } from "lucide-react";
 const Index = () => {
   const [quantities, setQuantities] = useState<Record<number, number>>({});
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [isMobileCartOpen, setIsMobileCartOpen] = useState(false);
 
   const handleQuantityChange = (id: number, quantity: number) => {
     setQuantities(prev => ({
@@ -38,6 +40,7 @@ const Index = () => {
     toast.success("Order downloaded successfully!", {
       description: "Check your downloads folder for the CSV file."
     });
+    setIsMobileCartOpen(false);
   };
 
   const filteredCrackers = selectedCategory === "all" 
@@ -124,17 +127,29 @@ const Index = () => {
           {/* Mobile Cart Button */}
           <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur-sm border-t shadow-lg z-30">
             <Button
-              onClick={handleDownloadOrder}
+              onClick={() => setIsMobileCartOpen(true)}
               disabled={cartItems.length === 0}
               className="w-full bg-gradient-festive hover:shadow-glow transition-all duration-300 text-primary-foreground font-semibold h-12"
             >
               <Sparkles className="mr-2 h-4 w-4" />
-              Order Now ({cartItems.length} items) - ₹
+              View Cart ({cartItems.length} items) - ₹
               {cartItems.reduce((sum, item) => sum + item.product.discountedPrice * item.quantity, 0).toLocaleString('en-IN')}
             </Button>
           </div>
         </div>
       </div>
+
+      {/* Mobile Cart Sheet */}
+      <Sheet open={isMobileCartOpen} onOpenChange={setIsMobileCartOpen}>
+        <SheetContent side="bottom" className="h-[90vh] p-0">
+          <SheetHeader className="p-4 border-b">
+            <SheetTitle>Your Cart</SheetTitle>
+          </SheetHeader>
+          <div className="h-full">
+            <Cart items={cartItems} onDownloadOrder={handleDownloadOrder} />
+          </div>
+        </SheetContent>
+      </Sheet>
 
       {/* Footer Spacing for Mobile */}
       <div className="lg:hidden h-20" />
