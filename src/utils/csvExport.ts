@@ -7,14 +7,26 @@ interface CartItem {
 
 export const downloadOrderAsCSV = (items: CartItem[]) => {
   // Create CSV header
-  const headers = ["Product Name", "Unit", "Quantity"];
+  const headers = ["Product Name", "Unit", "Quantity", "Unit Price (₹)", "Total Price (₹)"];
   
   // Create CSV rows
   const rows = items.map(item => [
     item.product.name,
     item.product.unit,
-    item.quantity.toString()
+    item.quantity.toString(),
+    item.product.discountedPrice.toString(),
+    (item.product.discountedPrice * item.quantity).toString()
   ]);
+
+  // Calculate total
+  const total = items.reduce(
+    (sum, item) => sum + item.product.discountedPrice * item.quantity,
+    0
+  );
+
+  // Add empty row and total
+  rows.push([]);
+  rows.push(["", "", "", "Grand Total:", total.toString()]);
 
   // Combine headers and rows
   const csvContent = [

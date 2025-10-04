@@ -35,7 +35,7 @@ export const ProductCard = ({ product, quantity, onQuantityChange }: ProductCard
               ₹{product.originalPrice}
             </span>
             <Badge variant="secondary" className="bg-gradient-festive text-primary-foreground text-xs px-2 py-0">
-              75% OFF
+              90% OFF
             </Badge>
           </div>
           <p className="text-xl font-bold bg-gradient-festive bg-clip-text text-transparent">
