@@ -65,13 +65,10 @@ const Index = () => {
             <div className="flex flex-col gap-1 text-center md:text-right">
               <div className="flex items-center gap-2 text-sm md:text-base justify-center md:justify-end">
                 <Phone className="h-4 w-4" />
-                <a href="tel:+919944063645" className="hover:underline">
-                  +91 99440 63645
+                <a href="tel:+919600589222" className="hover:underline">
+                  +91 96005 89222
                 </a>
               </div>
-              <a href="tel:+919787823249" className="text-sm hover:underline">
-                +91 97878 23249
-              </a>
             </div>
           </div>
         </div>
